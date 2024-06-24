@@ -1,0 +1,17 @@
+
+Name of Assignee: Malik Nouman Ali
+
+Approximate time taken to complete the assignment: 3 hours with googles help. 
+
+One thing that I would suggest to improve about this assignment: 
+
+Explicit Instructions on Exception Handling (Can I still use try catch as I did or its completly of the tabke)
+did not use .dotesttings
+
+Logic:
+Determines if the provided IP address should be throttled based on the configured ThrottleSettings.
+Tracks request counts per IP and applies throttling rules to limit request rates.
+
+Implements thread-safe operations for accessing and updating resources:
+ - Uses a lock for cache operations to ensure data integrity during concurrent read/write access.
+ - Employs a SemaphoreSlim to control concurrent updates to the resource provider, ensuring exclusive access for add or update operations.

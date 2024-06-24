@@ -1,0 +1,62 @@
+
+Main Task Description/Requirements:
+
+Write a class implementing IApiService interface, with the following specification
+- calls to IApiService methods, should be throttled according to the provided ThrottleSettings
+- assume that IResourceProviders methods might be long-running so use caching (without expiration) by ResourceId
+  (10 parallel IApiService.GetResource calls should trigger only 1 IResourceProvider.GetResource call)
+- IApiService methods should be thread-safe for concurrent calls where GetResource for the same ResourceId can be accessed
+  concurrently but AddOrUpdateResource for the same ResourceId should not, from obvious Get & Update semantics
+  
+Additional Details Specification:
+- service should dependency inject (at least) ThrottleSettings, IResourceProvider<T>, and ITimeProvider as shown
+  in ApiServiceFactory
+- to get and update resource in IApiServices GetResource and AddOrUpdateResource use IResourceProvider methods
+  GetResource and AddOrUpdateResource respectively
+- throttling should be implemented using the provided ITimeProvider for testing purposes (as demonstrated in the attached tests)
+- do not throw exceptions, rather define error type and return concrete error type with a response.Success set to false
+- methods of IApiService can and will be called in parallel, so make sure that they are thread-safe
+- IApiService intended lifetime is a singleton
+
+Unspecified Logic:
+- there are intentionally some unspecified details left out (with no wrong answers) as its often 
+  the case in real-life projects. Use your best judgment of what seems to be suitable based on project specification 
+  and provide a short explanation in the comments about what direction you took and why
+    (example: 
+    // I will assume that parameter "name" in method AddCustomerName(string name) is a valid UTF name and not 
+    // validate explicitly things like length, special characters, slurs etc. (even though in the production app we would consider it)
+
+Implementation Guidelines:
+- the task is designed to take around 2-4 hours for senior developers to complete, focus on quality over the "happy path" solution,
+  we want to be respectful of your time, so in case you would cross 4 hour mark, just document your intentions in a way
+  other developer would be able to follow/understand
+- you can modify any code in the project as you see fit as long as it does not change the above specification, so even adding
+  constructors, or changing property visibility in provided code is fine. Same for tests, just make sure that they still pass
+- (optional) we also included out .DotSettings file config for code format, so you can use close to the same formatting as we do
+- use comments to convey potential application pain points/issues that are outside of scope of this task (or your available time),
+  but you would consider in a production application, but at the same time avoid unnecessary comments that just describe what the code does
+- half-implementing a feature and not including comments to cover full problem scope, shows lack of clear understanding 
+  of underlying programming issue and is considered the worst possible error you can make in this assignment
+- comments are not a replacement for clean code, but a time saving option we offer, 
+  ideal code solution would contain exactly zero comments
+- the simple included tests are meant only as a good-faith help, passing them is in no sense indication of the final evaluation result
+  or the whole application fulfilling the main 3 requirements
+
+Evaluation Criteria:
+- functionality in ALL scenarios
+- readability
+- clean code and code design
+- app/system design related comments
+
+Submission:
+- deadline for submission is the end of the second weekend from the day of receiving the task
+- send as a zip file or uploading to the public source control repository. 
+  In case of repository option, DO NOT include Instructions.txt file or any company-specific information, 
+  like naming repository "Cleo-Task", as we do not want other candidates potentially copying your solution,
+  but feel free to showcase it in your portfolio etc. as your own work
+- fill up the Summary.txt
+
+We understand that coding tasks can be time-consuming, so we truly appreciate your effort and time spent on this task.
+This task is real world example of coding problems you would encounter in our projects, it is not just Google-style
+annoying filter-out interview step, so we hope you will get a good idea of what it would be like to work with us.
+Happy coding!
